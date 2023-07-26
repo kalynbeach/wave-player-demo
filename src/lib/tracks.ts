@@ -2,7 +2,7 @@ import type { Track } from './types'
 
 export const tracks: Track[] = [
   {
-    title: '0',
+    title: 'Initializer',
     artist: 'KB',
     src: '',
     image: ''

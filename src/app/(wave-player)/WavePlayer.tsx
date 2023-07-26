@@ -27,7 +27,7 @@ export default function WavePlayer() {
   }
 
   return (
-    <div className=''>
+    <div className='wave-player p-4 flex flex-col gap-2 border border-neutral-900 rounded'>
       <TrackDisplay
         {...{
           currentTrack,
@@ -35,6 +35,14 @@ export default function WavePlayer() {
           progressBarRef,
           setDuration,
           handleNext
+        }}
+      />
+      <ProgressBar
+        {...{
+          audioRef,
+          progressBarRef,
+          timeProgress,
+          duration
         }}
       />
       <Controls
@@ -46,15 +54,8 @@ export default function WavePlayer() {
           trackIndex,
           setTrackIndex,
           setCurrentTrack,
+          setTimeProgress,
           handleNext
-        }}
-      />
-      <ProgressBar
-        {...{
-          audioRef,
-          progressBarRef,
-          timeProgress,
-          duration
         }}
       />
     </div>

@@ -12,11 +12,31 @@ export default function ProgressBar({
   duration
 }: Props) {
 
-  const handleProgressChange = () => {}
+  const handleProgressChange = () => {
+    audioRef.current!.currentTime = parseInt(progressBarRef.current!.value)
+  }
 
-  const formatTime = (time: number) => {}
+  const formatTime = (time: number) => {
+    if (time) {
+      const minutes = Math.floor(time / 60)
+      const seconds = Math.floor(time % 60)
+      const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes
+      const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds
+      return `${formattedMinutes}:${formattedSeconds}`
+    }
+    return '00:00'
+  }
 
   return (
-    <div>ProgressBar</div>
+    <div className='progress-bar p-2 flex flex-row gap-2 justify-between items-center border border-neutral-900 rounded'>
+      <span>{formatTime(timeProgress)}</span>
+      <input
+        type='range'
+        ref={progressBarRef}
+        defaultValue={0}
+        onChange={handleProgressChange}
+      />
+      <span>{formatTime(duration)}</span>
+    </div>
   )
 }
