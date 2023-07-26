@@ -86,22 +86,22 @@ export default function Controls({
       <div className='flex flex-row gap-1 justify-between items-center'>
         {/* Previous */}
         <button
-          onClick={() => handlePrevious}
-          className=''
+          onClick={() => handlePrevious()}
+          className='text-xl'
         >
           ⏮️
         </button>
         {/* Play/Pause */}
         <button
-          onClick={() => togglePause}
-          className=''
+          onClick={() => togglePause()}
+          className='text-xl'
         >
           {isPlaying ? '⏸️' : '▶️'}
         </button>
         {/* Next */}
         <button
-          onClick={() => handleNext}
-          className=''
+          onClick={() => handleNext()}
+          className='text-xl'
         >
           ⏭️
         </button>

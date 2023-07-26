@@ -17,16 +17,16 @@ export default function TrackDisplay({
   handleNext
 }: Props) {
   const onLoadedMetadata = () => {
-    if (audioRef && audioRef.current && progressBarRef) {
+    if (audioRef.current && progressBarRef) {
       const seconds = audioRef.current.duration
-      const max = seconds.toString()
       setDuration(seconds)
+      const max = seconds.toString()
       progressBarRef.current!.max = max
     }
   }
 
   return (
-    <div className='track-display '>
+    <div className='track-display'>
       <audio
         src={currentTrack.src}
         ref={audioRef}
@@ -53,9 +53,9 @@ export default function TrackDisplay({
           }
         </div>
         {/* Text */}
-        <div className='w-full flex flex-col gap-2 font-mono'>
-          <span className='text-lg'>{currentTrack.title}</span>
-          <span className='text-base'>{currentTrack.artist}</span>
+        <div className='w-full flex flex-col gap-2'>
+          <span className='font-mono text-lg'>{currentTrack.title}</span>
+          <span className='font-mono text-base'>{currentTrack.artist}</span>
           {/* TODO: Add `album` and any other track info */}
         </div>
       </div>
