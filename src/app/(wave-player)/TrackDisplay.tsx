@@ -3,6 +3,7 @@ import type { Track } from '@/lib/types'
 
 type Props = {
   currentTrack: Track
+  isLooping: boolean
   audioRef: React.RefObject<HTMLAudioElement>
   progressBarRef: React.RefObject<HTMLInputElement>
   setDuration: React.Dispatch<React.SetStateAction<number>>
@@ -11,6 +12,7 @@ type Props = {
 
 export default function TrackDisplay({
   currentTrack,
+  isLooping,
   audioRef,
   progressBarRef,
   setDuration,
@@ -32,18 +34,20 @@ export default function TrackDisplay({
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}
+        loop={isLooping}
+        defaultValue={currentTrack.src}
       />
       {/* Audio Info */}
       <div className='flex flex-col gap-2 justify-between items-center'>
         {/* Image */}
-        <div className='w-[330px] h-[330px] bg-neutral-900 rounded'>
+        <div className='w-[346px] h-[346px] bg-neutral-900 rounded'>
           { 
             currentTrack.image ? (
               <Image 
                 src={currentTrack.image}
                 alt={currentTrack.title}
-                width={330}
-                height={320}
+                width={346}
+                height={346}
               />
             ) : (
               <div className='w-full h-full flex justify-center items-center bg-neutral-300'>

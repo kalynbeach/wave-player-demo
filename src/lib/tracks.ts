@@ -1,6 +1,8 @@
 import type { Track } from './types'
 
-const trackSrcBaseUrl = process.env.TRACK_SRC_BASE_URL
+const trackSrcBaseUrl = process.env.NEXT_PUBLIC_TRACK_SRC_BASE_URL
+
+console.log(`[tracks] trackSrcBaseUrl: `, trackSrcBaseUrl)
 
 export const tracks: Track[] = [
   {
