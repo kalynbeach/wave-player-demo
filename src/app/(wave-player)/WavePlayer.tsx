@@ -39,7 +39,7 @@ export default function WavePlayer() {
   }, [audioInitialized, currentTrack])
 
   return (
-    <div className='wave-player p-4 flex flex-col gap-2 border border-neutral-900 rounded'>
+    <div className='wave-player w-96 p-4 flex flex-col gap-2 border border-neutral-900 rounded'>
       <TrackDisplay
         {...{
           currentTrack,

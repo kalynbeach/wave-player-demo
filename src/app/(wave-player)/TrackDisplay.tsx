@@ -40,14 +40,14 @@ export default function TrackDisplay({
       {/* Audio Info */}
       <div className='flex flex-col gap-2 justify-between items-center'>
         {/* Image */}
-        <div className='w-[346px] h-[346px] bg-neutral-900 rounded'>
+        <div className='w-[350px] h-[350px] bg-neutral-900 rounded'>
           { 
             currentTrack.image ? (
               <Image 
                 src={currentTrack.image}
                 alt={currentTrack.title}
-                width={346}
-                height={346}
+                width={350}
+                height={350}
               />
             ) : (
               <div className='w-full h-full flex justify-center items-center bg-neutral-300'>
