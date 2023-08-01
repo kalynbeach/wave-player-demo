@@ -2,8 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Controls from './Controls'
-import ProgressBar from './ProgressBar'
-import TrackDisplay from './TrackDisplay'
 import TrackImage from './TrackImage'
 import TrackInfo from './TrackInfo'
 import { tracks } from '@/lib/tracks'
@@ -51,16 +49,6 @@ export default function WavePlayer() {
 
   return (
     <div className='wave-player p-2 flex flex-row gap-2 border border-neutral-900 rounded'>
-      {/* <TrackDisplay
-        {...{
-          currentTrack,
-          isLooping,
-          audioRef,
-          progressBarRef,
-          setDuration,
-          handleNext
-        }}
-      /> */}
       <audio
         src={currentTrack.src}
         ref={audioRef}
@@ -76,14 +64,6 @@ export default function WavePlayer() {
         <TrackInfo
           track={currentTrack}
         />
-        {/* <ProgressBar
-          {...{
-            audioRef,
-            progressBarRef,
-            timeProgress,
-            duration
-          }}
-        /> */}
         <Controls
           {...{
             audioRef,
