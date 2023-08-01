@@ -29,7 +29,7 @@ export default function ProgressBar({
 
   return (
     <div className='progress-bar p-2 flex flex-row gap-2 justify-between items-center border border-neutral-900 rounded'>
-      <span className='w-14 font-mono'>{formatTime(timeProgress)}</span>
+      <span className='w-14 font-mono text-sm'>{formatTime(timeProgress)}</span>
       <input
         type='range'
         ref={progressBarRef}
@@ -37,7 +37,7 @@ export default function ProgressBar({
         onChange={handleProgressChange}
         className='w-48'
       />
-      <span className='w-14 text-right font-mono'>{formatTime(duration)}</span>
+      <span className='w-14 font-mono text-sm text-right'>{formatTime(duration)}</span>
     </div>
   )
 }
