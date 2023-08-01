@@ -28,7 +28,7 @@ export default function ProgressBar({
   }
 
   return (
-    <div className='progress-bar p-2 flex flex-row gap-2 justify-between items-center border border-neutral-900 rounded'>
+    <div className='progress-bar p-2 flex flex-row gap-2 justify-between items-center'>
       <span className='w-14 font-mono text-sm'>{formatTime(timeProgress)}</span>
       <input
         type='range'
