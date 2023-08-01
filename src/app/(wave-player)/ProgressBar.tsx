@@ -28,16 +28,16 @@ export default function ProgressBar({
   }
 
   return (
-    <div className='progress-bar p-2 flex flex-row gap-2 justify-between items-center border border-neutral-900 rounded'>
-      <span className='w-14 font-mono text-sm'>{formatTime(timeProgress)}</span>
+    <div className='progress-bar p-2 md:p-0 flex flex-row gap-2 justify-between items-center'>
+      <span className='w-10 md:w-12 text-xs md:text-sm font-mono'>{formatTime(timeProgress)}</span>
       <input
         type='range'
         ref={progressBarRef}
         defaultValue={0}
         onChange={handleProgressChange}
-        className='w-48'
+        className='w-40 md:w-48'
       />
-      <span className='w-14 font-mono text-sm text-right'>{formatTime(duration)}</span>
+      <span className='w-10 md:w-12 text-xs md:text-sm font-mono text-right'>{formatTime(duration)}</span>
     </div>
   )
 }

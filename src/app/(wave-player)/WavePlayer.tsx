@@ -2,10 +2,10 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Controls from './Controls'
-import ProgressBar from './ProgressBar'
-import TrackDisplay from './TrackDisplay'
-import type { Track } from '@/lib/types'
+import TrackImage from './TrackImage'
+import TrackInfo from './TrackInfo'
 import { tracks } from '@/lib/tracks'
+import type { Track } from '@/lib/types'
 
 export default function WavePlayer() {
   const [trackIndex, setTrackIndex] = useState(0)
@@ -17,6 +17,15 @@ export default function WavePlayer() {
 
   const audioRef = useRef<HTMLAudioElement>(null)
   const progressBarRef = useRef<HTMLInputElement>(null)
+
+  const onLoadedMetadata = () => {
+    if (audioRef.current && progressBarRef) {
+      const seconds = audioRef.current.duration
+      setDuration(seconds)
+      const max = seconds.toString()
+      progressBarRef.current!.max = max
+    }
+  }
 
   const handleNext = () => {
     if (trackIndex < tracks.length - 1) {
@@ -39,40 +48,41 @@ export default function WavePlayer() {
   }, [audioInitialized, currentTrack])
 
   return (
-    <div className='wave-player w-96 p-4 flex flex-col gap-2 border border-neutral-900 rounded'>
-      <TrackDisplay
-        {...{
-          currentTrack,
-          isLooping,
-          audioRef,
-          progressBarRef,
-          setDuration,
-          handleNext
-        }}
+    <div className='wave-player p-2 max-w-xs md:max-w-3xl'>
+      <audio
+        src={currentTrack.src}
+        ref={audioRef}
+        onLoadedMetadata={onLoadedMetadata}
+        onEnded={handleNext}
+        loop={isLooping}
+        defaultValue={currentTrack.src}
       />
-      <ProgressBar
-        {...{
-          audioRef,
-          progressBarRef,
-          timeProgress,
-          duration
-        }}
-      />
-      <Controls
-        {...{
-          audioRef,
-          progressBarRef,
-          duration,
-          tracks,
-          trackIndex,
-          isLooping,
-          setTrackIndex,
-          setCurrentTrack,
-          setTimeProgress,
-          setIsLooping,
-          handleNext
-        }}
-      />
+      <div className='wave-player-inner p-2 flex flex-col md:flex-row gap-2 border border-neutral-900 rounded'>
+        <TrackImage
+          track={currentTrack}
+        />
+        <div className='flex flex-col md:gap-2 justify-between'>
+          <TrackInfo
+            track={currentTrack}
+          />
+          <Controls
+            {...{
+              audioRef,
+              progressBarRef,
+              timeProgress,
+              duration,
+              tracks,
+              trackIndex,
+              isLooping,
+              setTrackIndex,
+              setCurrentTrack,
+              setTimeProgress,
+              setIsLooping,
+              handleNext
+            }}
+          />
+        </div>
+      </div>
     </div>
   )
 }
