@@ -48,7 +48,7 @@ export default function WavePlayer() {
   }, [audioInitialized, currentTrack])
 
   return (
-    <div className='wave-player p-2 flex flex-row gap-2 border border-neutral-900 rounded'>
+    <div className='wave-player p-2 max-w-xs md:max-w-3xl'>
       <audio
         src={currentTrack.src}
         ref={audioRef}
@@ -57,29 +57,31 @@ export default function WavePlayer() {
         loop={isLooping}
         defaultValue={currentTrack.src}
       />
-      <TrackImage
-        track={currentTrack}
-      />
-      <div className='flex flex-col gap-2 justify-between'>
-        <TrackInfo
+      <div className='wave-player-inner p-2 flex flex-col md:flex-row gap-2 border border-neutral-900 rounded'>
+        <TrackImage
           track={currentTrack}
         />
-        <Controls
-          {...{
-            audioRef,
-            progressBarRef,
-            timeProgress,
-            duration,
-            tracks,
-            trackIndex,
-            isLooping,
-            setTrackIndex,
-            setCurrentTrack,
-            setTimeProgress,
-            setIsLooping,
-            handleNext
-          }}
-        />
+        <div className='flex flex-col md:gap-2 justify-between'>
+          <TrackInfo
+            track={currentTrack}
+          />
+          <Controls
+            {...{
+              audioRef,
+              progressBarRef,
+              timeProgress,
+              duration,
+              tracks,
+              trackIndex,
+              isLooping,
+              setTrackIndex,
+              setCurrentTrack,
+              setTimeProgress,
+              setIsLooping,
+              handleNext
+            }}
+          />
+        </div>
       </div>
     </div>
   )
