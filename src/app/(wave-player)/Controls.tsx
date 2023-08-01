@@ -139,27 +139,6 @@ export default function Controls({
           }}
         />
       </div>
-      
-      {/* Volume Controls */}
-      {/* <div className='flex flex-row gap-2 justify-between items-center'> */}
-        {/* Slider */}
-        {/* <input
-          type='range'
-          min={0}
-          max={100}
-          value={volume}
-          onChange={(e) => setVolume(e.target.valueAsNumber)}
-          className={`w-16 bg-gradient-to-r from-green-500 from-${volume}%`}
-        /> */}
-        {/* Mute */}
-        {/* <button onClick={() => setIsMuted(!isMuted)} className=''>
-          {
-            isMuted ?
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4zM22 9l-6 6M16 9l6 6"/></svg> :
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          }
-        </button> */}
-      {/* </div> */}
     </div>
   )
 }
