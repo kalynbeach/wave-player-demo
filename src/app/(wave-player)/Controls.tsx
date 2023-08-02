@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { useMode } from './ModeContext'
 import ProgressBar from './ProgressBar'
 import type { Track } from '@/lib/types'
 
@@ -36,6 +37,7 @@ export default function Controls({
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
   const [volume, setVolume] = useState(75)
+  const mode = useMode()
 
   const togglePause = () => {
     setIsPlaying(!isPlaying)
@@ -106,9 +108,13 @@ export default function Controls({
             }
           </button>
           {/* Previous */}
-          <button onClick={() => handlePrevious()} className=''>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
-          </button>
+          {
+            mode === 'playlist' && (
+              <button onClick={() => handlePrevious()} className=''>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+              </button>
+            )
+          }
           {/* Play/Pause */}
           <button onClick={() => togglePause()} className=''>
             {
@@ -118,9 +124,13 @@ export default function Controls({
             }
           </button>
           {/* Next */}
-          <button onClick={() => handleNext()} className=''>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
-          </button>
+          {
+            mode === 'playlist' && (
+              <button onClick={() => handleNext()} className=''>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+              </button>
+            )
+          }
           {/* Mute */}
           <button onClick={() => setIsMuted(!isMuted)} className='justify-self-end'>
             {

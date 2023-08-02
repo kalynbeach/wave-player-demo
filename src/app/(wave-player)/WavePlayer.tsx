@@ -1,13 +1,21 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { ModeProvider } from './ModeContext'
 import Controls from './Controls'
 import TrackImage from './TrackImage'
 import TrackInfo from './TrackInfo'
-import { tracks } from '@/lib/tracks'
+import { WavePlayerMode } from '@/lib/types'
 import type { Track } from '@/lib/types'
 
-export default function WavePlayer() {
+type Props = {
+  id: number
+  mode: WavePlayerMode
+  tracks: Track[]
+  isActive: boolean
+}
+
+export default function WavePlayer({ id, mode, tracks, isActive }: Props) {
   const [trackIndex, setTrackIndex] = useState(0)
   const [currentTrack, setCurrentTrack] = useState<Track>(tracks[trackIndex])
   const [timeProgress, setTimeProgress] = useState(0)
@@ -39,50 +47,52 @@ export default function WavePlayer() {
 
   useEffect(() => {
     if (!audioInitialized) {
-      console.log(`[WavePlayer] Initializing audio...`)
+      console.log(`[WavePlayer (${id})] Initializing audio...`)
       audioRef.current!.src = currentTrack.src
       audioRef.current!.load()
-      console.log(`[WavePlayer] Audio initialized: `, audioRef.current)
+      console.log(`[WavePlayer (${id})] Audio initialized: `, audioRef.current)
       setAudioInitialized(true)
     }
-  }, [audioInitialized, currentTrack])
+  }, [audioInitialized, currentTrack, id])
 
   return (
-    <div className='wave-player p-2 max-w-xs md:max-w-3xl'>
-      <audio
-        src={currentTrack.src}
-        ref={audioRef}
-        onLoadedMetadata={onLoadedMetadata}
-        onEnded={handleNext}
-        loop={isLooping}
-        defaultValue={currentTrack.src}
-      />
-      <div className='wave-player-inner p-2 flex flex-col md:flex-row gap-2 border border-neutral-900 rounded'>
-        <TrackImage
-          track={currentTrack}
+    <div className='wave-player max-w-xs md:max-w-3xl'>
+      <ModeProvider mode={mode}>
+        <audio
+          src={currentTrack.src}
+          ref={audioRef}
+          onLoadedMetadata={onLoadedMetadata}
+          onEnded={handleNext}
+          loop={isLooping}
+          defaultValue={currentTrack.src}
         />
-        <div className='flex flex-col md:gap-2 justify-between'>
-          <TrackInfo
+        <div className='wave-player-inner p-2 flex flex-col md:flex-row gap-2 border border-neutral-900 rounded'>
+          <TrackImage
             track={currentTrack}
           />
-          <Controls
-            {...{
-              audioRef,
-              progressBarRef,
-              timeProgress,
-              duration,
-              tracks,
-              trackIndex,
-              isLooping,
-              setTrackIndex,
-              setCurrentTrack,
-              setTimeProgress,
-              setIsLooping,
-              handleNext
-            }}
-          />
+          <div className='flex flex-col md:gap-2 justify-between'>
+            <TrackInfo
+              track={currentTrack}
+            />
+            <Controls
+              {...{
+                audioRef,
+                progressBarRef,
+                timeProgress,
+                duration,
+                tracks,
+                trackIndex,
+                isLooping,
+                setTrackIndex,
+                setCurrentTrack,
+                setTimeProgress,
+                setIsLooping,
+                handleNext
+              }}
+            />
+          </div>
         </div>
-      </div>
+      </ModeProvider>
     </div>
   )
 }
