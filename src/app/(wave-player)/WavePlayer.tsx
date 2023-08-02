@@ -56,7 +56,7 @@ export default function WavePlayer({ id, mode, tracks, isActive }: Props) {
   }, [audioInitialized, currentTrack, id])
 
   return (
-    <div className='wave-player p-2 max-w-xs md:max-w-3xl'>
+    <div className='wave-player max-w-xs md:max-w-3xl'>
       <ModeProvider mode={mode}>
         <audio
           src={currentTrack.src}

@@ -7,14 +7,18 @@ type Props = {
 
 export default function WavePlayerStack({ tracks }: Props) {
   return (
-    tracks.map((track: Track) => (
-      <WavePlayer
-        key={track.id}
-        id={track.id}
-        mode={track.mode}
-        tracks={track.mode === WavePlayerMode.Loop ? [track] : tracks}
-        isActive={false}
-      />
-    ))
+    <div className='wave-player-stack flex flex-col gap-6 justify-center items-center'>
+      {
+        tracks.map((track: Track) => (
+          <WavePlayer
+            key={track.id}
+            id={track.id}
+            mode={track.mode}
+            tracks={track.mode === WavePlayerMode.Loop ? [track] : tracks}
+            isActive={false}
+          />
+        ))
+      }
+    </div>
   )
 }
