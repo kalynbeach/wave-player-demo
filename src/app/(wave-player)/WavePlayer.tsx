@@ -5,15 +5,17 @@ import { ModeProvider } from './ModeContext'
 import Controls from './Controls'
 import TrackImage from './TrackImage'
 import TrackInfo from './TrackInfo'
-import { tracks } from '@/lib/tracks'
 import { WavePlayerMode } from '@/lib/types'
 import type { Track } from '@/lib/types'
 
 type Props = {
+  id: number
   mode: WavePlayerMode
+  tracks: Track[]
+  isActive: boolean
 }
 
-export default function WavePlayer({ mode }: Props) {
+export default function WavePlayer({ id, mode, tracks, isActive }: Props) {
   const [trackIndex, setTrackIndex] = useState(0)
   const [currentTrack, setCurrentTrack] = useState<Track>(tracks[trackIndex])
   const [timeProgress, setTimeProgress] = useState(0)
@@ -45,13 +47,13 @@ export default function WavePlayer({ mode }: Props) {
 
   useEffect(() => {
     if (!audioInitialized) {
-      console.log(`[WavePlayer] Initializing audio...`)
+      console.log(`[WavePlayer (${id})] Initializing audio...`)
       audioRef.current!.src = currentTrack.src
       audioRef.current!.load()
-      console.log(`[WavePlayer] Audio initialized: `, audioRef.current)
+      console.log(`[WavePlayer (${id})] Audio initialized: `, audioRef.current)
       setAudioInitialized(true)
     }
-  }, [audioInitialized, currentTrack])
+  }, [audioInitialized, currentTrack, id])
 
   return (
     <div className='wave-player p-2 max-w-xs md:max-w-3xl'>
