@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { useMode } from './ModeContext'
+import { useMode } from '../context/ModeContext'
 import ProgressBar from './ProgressBar'
 import type { Track } from '@/lib/types'
 
