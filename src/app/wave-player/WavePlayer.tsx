@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { ModeProvider } from './ModeContext'
-import Controls from './Controls'
-import TrackImage from './TrackImage'
-import TrackInfo from './TrackInfo'
+import { ModeProvider } from './context/ModeContext'
+import Controls from './components/Controls'
+import TrackImage from './components/TrackImage'
+import TrackInfo from './components/TrackInfo'
 import { WavePlayerMode } from '@/lib/types'
 import type { Track } from '@/lib/types'
 
@@ -12,7 +12,7 @@ type Props = {
   id: number
   mode: WavePlayerMode
   tracks: Track[]
-  isActive: boolean
+  isActive: boolean // TODO: replace this with component state?
 }
 
 export default function WavePlayer({ id, mode, tracks, isActive }: Props) {

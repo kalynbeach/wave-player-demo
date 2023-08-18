@@ -2,10 +2,16 @@ import WavePlayer from './WavePlayer'
 import { Track, WavePlayerMode } from '@/lib/types'
 
 type Props = {
+  id: number
   tracks: Track[]
+  isActive: boolean
 }
 
-export default function WavePlayerStack({ tracks }: Props) {
+export default function WavePlayerStack({
+  id,
+  tracks,
+  isActive
+}: Props) {
   return (
     <div className='wave-player-stack flex flex-col gap-6 justify-center items-center'>
       {
