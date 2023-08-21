@@ -44,3 +44,6 @@ pnpm build
 
 - Add more tests
 - Add `WavePlayerStack` context
+  - If `WavePlayer` is in a `WavePlayerStack`:
+    - `WavePlayer` components will be able to access the `StackContext` context via the `useStack` hook
+      - `Controls`: on `isPlaying` state change, update `stackState.activePlayerId`

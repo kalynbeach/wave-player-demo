@@ -4,8 +4,10 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { useMode } from '../context/ModeContext'
 import ProgressBar from './ProgressBar'
 import type { Track } from '@/lib/types'
+import { useStack } from '../context/StackContext'
 
 type Props = {
+  id: number
   audioRef: React.RefObject<HTMLAudioElement>
   progressBarRef: React.RefObject<HTMLInputElement>
   duration: number
@@ -21,6 +23,7 @@ type Props = {
 }
 
 export default function Controls({
+  id,
   audioRef,
   progressBarRef,
   duration,
@@ -37,6 +40,7 @@ export default function Controls({
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
   const [volume, setVolume] = useState(75)
+  const [stackState, setStackState] = useStack()
   const mode = useMode()
 
   const togglePause = () => {
@@ -82,11 +86,13 @@ export default function Controls({
   useEffect(() => {
     if (isPlaying) {
       audioRef.current!.play()
+      stackState.activePlayerId = id
     } else {
       audioRef.current!.pause()
+      stackState.activePlayerId = null
     }
     playAnimationRef.current = requestAnimationFrame(update)
-  }, [audioRef, isPlaying, update])
+  }, [audioRef, isPlaying, update, stackState, id])
 
   useEffect(() => {
     audioRef.current!.volume = volume / 100

@@ -76,6 +76,7 @@ export default function WavePlayer({ id, mode, tracks, isActive }: Props) {
             />
             <Controls
               {...{
+                id,
                 audioRef,
                 progressBarRef,
                 timeProgress,

@@ -1,5 +1,8 @@
+'use client'
+
 import WavePlayer from './WavePlayer'
 import { Track, WavePlayerMode } from '@/lib/types'
+import { useStack } from '@/app/wave-player/context/StackContext'
 
 type Props = {
   id: number
@@ -12,6 +15,10 @@ export default function WavePlayerStack({
   tracks,
   isActive
 }: Props) {
+  const [stackState, setStackState] = useStack()
+
+  console.log(`[WavePlayerStack (${id})] stackState: `, stackState)
+
   return (
     <div className='wave-player-stack flex flex-col gap-6 justify-center items-center'>
       {
@@ -21,7 +28,7 @@ export default function WavePlayerStack({
             id={track.id}
             mode={track.mode}
             tracks={track.mode === WavePlayerMode.Loop ? [track] : tracks}
-            isActive={false}
+            isActive={stackState.activePlayerId ? stackState.activePlayerId === id : false}
           />
         ))
       }
