@@ -12,10 +12,10 @@ type Props = {
   id: number
   mode: WavePlayerMode
   tracks: Track[]
-  isActive: boolean // TODO: replace this with component state?
+  isStacked: boolean
 }
 
-export default function WavePlayer({ id, mode, tracks, isActive }: Props) {
+export default function WavePlayer({ id, mode, tracks, isStacked }: Props) {
   const [trackIndex, setTrackIndex] = useState(0)
   const [currentTrack, setCurrentTrack] = useState<Track>(tracks[trackIndex])
   const [timeProgress, setTimeProgress] = useState(0)
@@ -76,6 +76,7 @@ export default function WavePlayer({ id, mode, tracks, isActive }: Props) {
             />
             <Controls
               {...{
+                id,
                 audioRef,
                 progressBarRef,
                 timeProgress,
@@ -83,6 +84,7 @@ export default function WavePlayer({ id, mode, tracks, isActive }: Props) {
                 tracks,
                 trackIndex,
                 isLooping,
+                isStacked,
                 setTrackIndex,
                 setCurrentTrack,
                 setTimeProgress,

@@ -23,7 +23,7 @@ describe('WavePlayer', () => {
       id={0}
       mode={WavePlayerMode.Playlist}
       tracks={tracks}
-      isActive={false}
+      isStacked={false}
     />)
     // ...
   })
@@ -35,7 +35,6 @@ describe('WavePlayerStack', () => {
     render(<WavePlayerStack
       id={0}
       tracks={tracks}
-      isActive={false}
     />)
     // ...
   })
