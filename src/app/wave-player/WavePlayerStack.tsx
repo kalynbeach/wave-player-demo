@@ -7,13 +7,11 @@ import { useStack } from '@/app/wave-player/context/StackContext'
 type Props = {
   id: number
   tracks: Track[]
-  isActive: boolean
 }
 
 export default function WavePlayerStack({
   id,
-  tracks,
-  isActive
+  tracks
 }: Props) {
   const [stackState, setStackState] = useStack()
 
@@ -28,7 +26,7 @@ export default function WavePlayerStack({
             id={track.id}
             mode={track.mode}
             tracks={track.mode === WavePlayerMode.Loop ? [track] : tracks}
-            isActive={stackState.activePlayerId ? stackState.activePlayerId === id : false}
+            isStacked={true}
           />
         ))
       }

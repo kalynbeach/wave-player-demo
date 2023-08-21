@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { useStack } from '../context/StackContext'
 import { useMode } from '../context/ModeContext'
 import ProgressBar from './ProgressBar'
 import type { Track } from '@/lib/types'
-import { useStack } from '../context/StackContext'
 
 type Props = {
   id: number
@@ -15,6 +15,7 @@ type Props = {
   tracks: Track[]
   trackIndex: number
   isLooping: boolean
+  isStacked: boolean
   setTrackIndex: React.Dispatch<React.SetStateAction<number>>
   setCurrentTrack: React.Dispatch<React.SetStateAction<Track>>
   setTimeProgress: React.Dispatch<React.SetStateAction<number>>
@@ -31,6 +32,7 @@ export default function Controls({
   tracks,
   trackIndex,
   isLooping,
+  isStacked,
   setTrackIndex,
   setCurrentTrack,
   setTimeProgress,
@@ -45,6 +47,9 @@ export default function Controls({
 
   const togglePause = () => {
     setIsPlaying(!isPlaying)
+    if (isStacked) {
+      setStackState({ ...stackState, activePlayerId: isPlaying ? null : id })
+    }
   }
 
   const toggleLoop = () => {
@@ -86,13 +91,21 @@ export default function Controls({
   useEffect(() => {
     if (isPlaying) {
       audioRef.current!.play()
-      stackState.activePlayerId = id
     } else {
       audioRef.current!.pause()
-      stackState.activePlayerId = null
     }
     playAnimationRef.current = requestAnimationFrame(update)
-  }, [audioRef, isPlaying, update, stackState, id])
+  }, [audioRef, isPlaying, update])
+
+  useEffect(() => {
+    if (isStacked) {
+      if (stackState.activePlayerId === id) {
+        setIsPlaying(true)
+      } else {
+        setIsPlaying(false)
+      }
+    }
+  }, [isStacked, stackState, setStackState, id])
 
   useEffect(() => {
     audioRef.current!.volume = volume / 100

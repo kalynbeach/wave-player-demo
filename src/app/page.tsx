@@ -13,13 +13,12 @@ export default function Home() {
           id={0}
           mode={WavePlayerMode.Playlist}
           tracks={tracks}
-          isActive={false}
+          isStacked={false}
         />
         <h2 className='mt-6 text-xl font-mono'>WavePlayerStack</h2>
         <WavePlayerStack
           id={0}
           tracks={tracks}
-          isActive={false}
         />
       </div>
     </main>
