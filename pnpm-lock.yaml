@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@kalynbeach/wave-player':
+    specifier: ^1.0.2
+    version: 1.0.2(react-dom@18.2.0)(react@18.2.0)
   '@types/node':
     specifier: 20.5.0
     version: 20.5.0
@@ -712,6 +715,16 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
+
+  /@kalynbeach/wave-player@1.0.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NM6VgLhll1b/9WWFTFmoLHC49uIVu8ZlnpNA1rKIVCyjnyzW3aAmyrY/xmNVeVSP7xm3c9idNotidB7Se7HKMA==, tarball: https://npm.pkg.github.com/download/@kalynbeach/wave-player/1.0.2/33815e15e26f77f5295c6b78b6c812f303fc982b}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /@next/env@13.4.18:
     resolution: {integrity: sha512-ZUG5Y/KSSerggdeD2LIYgiYziKTuSE9oE2RnW8bhNw6WunA8MrVfrWaCDTYSx/UG8qzPpSF+BiZNiHUiALxCdA==}
