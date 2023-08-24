@@ -6,7 +6,7 @@ import { StackProvider } from './wave-player/context/StackContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'wave-player',
+  title: 'wave-player-demo',
   description: 'A music player.',
 }
 

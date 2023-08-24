@@ -14,9 +14,6 @@ export default function WavePlayerStack({
   tracks
 }: Props) {
   const [stackState, setStackState] = useStack()
-
-  console.log(`[WavePlayerStack (${id})] stackState: `, stackState)
-
   return (
     <div className='wave-player-stack flex flex-col gap-6 justify-center items-center'>
       {
